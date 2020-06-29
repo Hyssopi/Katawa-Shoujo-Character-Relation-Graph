@@ -9,7 +9,7 @@ const NODE_IMAGE_DIRECTORY_PATH = './images/nodes/';
 // Creating Help/About Dialog box
 let helpAboutHtml = '';
 helpAboutHtml += `
-<div style="margin: 10px 0px 10px 10px; line-height: 2; font-size: 18px; font-family: playtimewithhottoddiesRg;">
+<div style="margin: 10px 0px 10px 10px; line-height: 2; font-size: 16px; font-family: playtimewithhottoddiesRg;">
   <div style="padding: 0px 0px 10px 0px;">Interactive network graph visualizing Katawa Shoujo<br>characters and their relations.</div>
   <table style="padding: 0px 0px 10px 0px;">
     <tr>
@@ -174,7 +174,7 @@ const SELECTED_NODE_IMAGE_SIZE_MULTIPLIER = 1.1;
 // Relative size of the selectable node area
 const NODE_RELATIVE_SIZE = 7.5;
 // Offset of the node label
-const NODE_LABEL_OFFSET_Y = 7.2;
+const NODE_LABEL_OFFSET_Y = 8.2;
 // Line width of highlighted edges
 const HIGHLIGHTED_EDGE_LINE_WIDTH = 6;
 // Background color of the container chart background and link label background
@@ -198,15 +198,15 @@ let dagMode = null;
 function drawGraph(graphHtmlContainerId, graphData)
 {
   graph = ForceGraph()(document.getElementById(graphHtmlContainerId))
-    .width(window.innerWidth - 20)
-    .height(window.innerHeight - 20)
+    .width(window.innerWidth)
+    .height(window.innerHeight)
     .backgroundColor(BACKGROUND_COLOR)
     .nodeId('id')
     .nodeLabel(node =>
     {
       // Tooltip pop up when hovering over a node
       return `
-        <div style="margin: 5px; line-height: 1.5; font-size: 20px; font-family: playtimewithhottoddiesRg;">
+        <div style="margin: 5px; line-height: 1.5; font-size: 16px; font-family: playtimewithhottoddiesRg; max-width: 300px;">
           ${node.label}
         </div>
       `;
@@ -295,7 +295,7 @@ function drawGraph(graphHtmlContainerId, graphData)
       {
         let label = node.name;
         // Zoom out: globalScale is smaller (<1), Zoom in: globalScale is bigger (>40)
-        let fontSize = ((6 / globalScale) < 1.5) ? 1.5 : (6 / globalScale);
+        let fontSize = ((6 / globalScale) < 2.5) ? 2.5 : (6 / globalScale);
         ctx.font = ((highlightNodes.indexOf(node) !== -1) ? 'bold' : '') + ` ${fontSize}px playtimewithhottoddiesRg`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';

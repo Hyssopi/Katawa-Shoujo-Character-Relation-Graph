@@ -33,7 +33,7 @@
     {"id": "MISAKI_KAWANA ", "name": "Misaki Kawana ", "description": "Has scoliosis.", "imageFilename": "MISAKI_KAWANA .png", "color": "#6B6589", "group": "CHARACTER"},
     {"id": "UNNAMED_STUDENT", "name": "Unnamed Student", "description": "An unnamed student.", "imageFilename": "UNNAMED_STUDENT.png", "color": "#96979B", "group": "CHARACTER"},
     {"id": "TAKASHI_MAEDA", "name": "Takashi Maeda", "description": "A student who wears a beret with a bandaged ear.", "imageFilename": "TAKASHI_MAEDA.png", "color": "#5E4948", "group": "CHARACTER"},
-    {"id": "NATSUME_OOE", "name": "Natsume Ooe", "description": "a student in Hisao's homeroom class who has rheumatoid arthritis and heterochromia that she wears glasses to compensate for the low vision in her right eye.", "imageFilename": "NATSUME_OOE.png", "color": "#825A63", "group": "CHARACTER"},
+    {"id": "NATSUME_OOE", "name": "Natsume Ooe", "description": "A student in Hisao's homeroom class who has rheumatoid arthritis and heterochromia that she wears glasses to compensate for the low vision in her right eye.", "imageFilename": "NATSUME_OOE.png", "color": "#825A63", "group": "CHARACTER"},
     {"id": "NAOMI_INOUE", "name": "Naomi Inoue", "description": "A student at Yamaku High School who has epilepsy.", "imageFilename": "NAOMI_INOUE.png", "color": "#E5CFA0", "group": "CHARACTER"},
     {"id": "AKIO_HAYASHI", "name": "Akio Hayashi", "description": "Has osteoporosis.", "imageFilename": "AKIO_HAYASHI.png", "color": "#BF796F", "group": "CHARACTER"},
     {"id": "RITSU_TAINAKA", "name": "Ritsu Tainaka", "description": "Diagnosed with carpal tunnel syndrome.", "imageFilename": "RITSU_TAINAKA.png", "color": "#DCAE59", "group": "CHARACTER"},
