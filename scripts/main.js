@@ -180,6 +180,8 @@ const HIGHLIGHTED_EDGE_LINE_WIDTH = 6;
 // Background color of the container chart background and link label background
 const BACKGROUND_COLOR = '#FFF6E8';
 
+const UNSELECTED_OPACITY_HEX = Math.trunc(255 * UNSELECTED_OPACITY).toString(16);
+
 // Reference of the ForceGraph
 let graph;
 // List of nodes and links to highlight
@@ -310,7 +312,7 @@ function drawGraph(graphHtmlContainerId, graphData)
         }
         else
         {
-          ctx.fillStyle = '#000000' + (Math.trunc(255 * UNSELECTED_OPACITY)).toString(16);
+          ctx.fillStyle = '#000000' + UNSELECTED_OPACITY_HEX;
         }
         ctx.fillText(label, node.x, node.y + NODE_LABEL_OFFSET_Y);
       }
@@ -325,7 +327,7 @@ function drawGraph(graphHtmlContainerId, graphData)
       let linkArrowColor = link.target.color;
       if ((highlightLinks.indexOf(link) === -1) && (highlightLinks.length !== 0))
       {
-        linkArrowColor += (Math.trunc(255 * UNSELECTED_OPACITY)).toString(16);
+        linkArrowColor += UNSELECTED_OPACITY_HEX;
       }
       return linkArrowColor;
     })
@@ -363,8 +365,8 @@ function drawGraph(graphHtmlContainerId, graphData)
       }
       else
       {
-        lineGradient.addColorStop(0, link.source.color + Math.trunc(255 * UNSELECTED_OPACITY).toString(16));
-        lineGradient.addColorStop(1, link.target.color + Math.trunc(255 * UNSELECTED_OPACITY).toString(16));
+        lineGradient.addColorStop(0, link.source.color + UNSELECTED_OPACITY_HEX);
+        lineGradient.addColorStop(1, link.target.color + UNSELECTED_OPACITY_HEX);
       }
       
       ctx.beginPath();
