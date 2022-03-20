@@ -205,11 +205,16 @@ function drawGraph(graphHtmlContainerId, graphData)
     .nodeLabel(node =>
     {
       // Tooltip pop up when hovering over a node
-      return `
-        <div style="margin: 5px; line-height: 1.5; font-size: 16px; font-family: playtimewithhottoddiesRg; max-width: 300px;">
-          ${node.label}
-        </div>
-      `;
+      let nodeLabelHtml = '';
+      if (node.label !== '')
+      {
+        nodeLabelHtml = `
+          <div style="margin: 5px; line-height: 1.5; font-size: 16px; font-family: playtimewithhottoddiesRg; max-width: 300px;">
+            ${node.label}
+          </div>
+        `;
+      }
+      return nodeLabelHtml;
     })
     .nodeRelSize(NODE_RELATIVE_SIZE)
     .onNodeClick(node =>
@@ -317,11 +322,16 @@ function drawGraph(graphHtmlContainerId, graphData)
     })
     .linkDirectionalArrowColor(function(link)
     {
-      return link.target.color;
+      let linkArrowColor = link.target.color;
+      if ((highlightLinks.indexOf(link) === -1) && (highlightLinks.length !== 0))
+      {
+        linkArrowColor += (Math.trunc(255 * UNSELECTED_OPACITY)).toString(16);
+      }
+      return linkArrowColor;
     })
     .linkLabel(function(link)
     {
-      if (link.fullDescriptionHtml == '')
+      if (link.fullDescriptionHtml === '')
       {
         return;
       }
@@ -346,8 +356,16 @@ function drawGraph(graphHtmlContainerId, graphData)
       
       // Draw link line
       let lineGradient = ctx.createLinearGradient(link.source.x, link.source.y, link.target.x, link.target.y);
-      lineGradient.addColorStop(0, link.source.color);
-      lineGradient.addColorStop(1, link.target.color);
+      if ((highlightLinks.indexOf(link) !== -1) || (highlightLinks.length === 0))
+      {
+        lineGradient.addColorStop(0, link.source.color);
+        lineGradient.addColorStop(1, link.target.color);
+      }
+      else
+      {
+        lineGradient.addColorStop(0, link.source.color + Math.trunc(255 * UNSELECTED_OPACITY).toString(16));
+        lineGradient.addColorStop(1, link.target.color + Math.trunc(255 * UNSELECTED_OPACITY).toString(16));
+      }
       
       ctx.beginPath();
       ctx.strokeStyle = lineGradient;
@@ -404,27 +422,29 @@ function drawGraph(graphHtmlContainerId, graphData)
         }
         
         let label = `${link.shortDescription}`;
-        
-        // Estimate font size to fit in link length
-        ctx.font = '1px playtimewithhottoddiesRg';
-        let fontSize = Math.min(EDGE_MAXIMUM_FONT_SIZE, maxTextLength / ctx.measureText(label).width);
-        ctx.font = `${fontSize}px playtimewithhottoddiesRg`;
-        let textWidth = ctx.measureText(label).width;
-        let backgroundDimensions = [textWidth, fontSize].map(n => n + fontSize * 0.2);
-        
-        // Draw text label (with background rectangle)
-        ctx.save();
-        ctx.translate(textPosition.x, textPosition.y);
-        ctx.rotate(textAngle);
-        
-        ctx.fillStyle = BACKGROUND_COLOR + (Math.trunc(255 * 0.8)).toString(16);
-        ctx.fillRect(-backgroundDimensions[0] / 2, -backgroundDimensions[1] / 2, ...backgroundDimensions);
-        
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillStyle = 'black';
-        ctx.fillText(label, 0, 0);
-        ctx.restore();
+        if (label !== '')
+        {
+          // Estimate font size to fit in link length
+          ctx.font = '1px playtimewithhottoddiesRg';
+          let fontSize = Math.min(EDGE_MAXIMUM_FONT_SIZE, maxTextLength / ctx.measureText(label).width);
+          ctx.font = `${fontSize}px playtimewithhottoddiesRg`;
+          let textWidth = ctx.measureText(label).width;
+          let backgroundDimensions = [textWidth, fontSize].map(n => n + fontSize * 0.2);
+          
+          // Draw text label (with background rectangle)
+          ctx.save();
+          ctx.translate(textPosition.x, textPosition.y);
+          ctx.rotate(textAngle);
+          
+          ctx.fillStyle = BACKGROUND_COLOR + (Math.trunc(255 * 0.8)).toString(16);
+          ctx.fillRect(-backgroundDimensions[0] / 2, -backgroundDimensions[1] / 2, ...backgroundDimensions);
+          
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillStyle = 'black';
+          ctx.fillText(label, 0, 0);
+          ctx.restore();
+        }
       }
     })
     .dagLevelDistance(30)
