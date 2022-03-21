@@ -326,7 +326,7 @@ function drawGraph(graphHtmlContainerId, graphData)
       }
       else if (highlightLinks.indexOf(link) !== -1)
       {
-        return 4.0;
+        return 3.0;
       }
       else
       {
